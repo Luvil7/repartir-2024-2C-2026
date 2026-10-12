@@ -62,13 +62,13 @@ public class MontoMayorACeroSteps extends CucumberSteps {
                 .contains(enPesos(totalInicial));
     }
 
-    @Y("debería ser informado que el monto no puede ser negativo")
-    public void deberiaSerInformadoQueElMontoNoPuedeSerNegativo() {
+    @Y("debería ser informado que el monto debe ser mayor a cero")
+    public void deberiaSerInformadoQueElMontoDebeSerMayorACero() {
 
         assertThat(mensajeInformado)
                 .as("Mensaje informado al usuario")
                 .contains("Error")
-                .contains("El monto no puede ser negativo");
+                .contains("El monto debe ser mayor a cero");
     }
 
     private void completarElMonto(int monto) {
