@@ -47,9 +47,9 @@ export class GastoNuevoComponent implements OnInit {
 
   guardar(): void {
 
-    if (this.monto < 0) {
+    if (!(this.monto > 0)) {
 
-      this.guardadoFallido(new Excepcion('El monto no puede ser negativo'));
+      this.guardadoFallido(new Excepcion('El monto debe ser mayor a cero'));
       return;
     }
 
