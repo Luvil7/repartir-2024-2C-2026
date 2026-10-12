@@ -46,17 +46,23 @@ public class BaseDeDatosFixture {
 
     public void tieneElGrupoSinGastos(int id, String nombre) {
 
+        tieneElGrupoConTotal(id, nombre, 0);
+    }
+
+    public void tieneElGrupoConTotal(int id, String nombre, int total) {
+
         estaVacia();
         var insert =
                 """
                     INSERT INTO grupo (id, nombre, total)
-                    VALUES (<ID>, '<NOMBRE>', 0);
-                            
+                    VALUES (<ID>, '<NOMBRE>', <TOTAL>);
+
                     INSERT INTO grupo_miembros (grupo_id, miembro)
                     VALUES (<ID>, 'bob'), (<ID>, 'patricio')
                 """
                 .replaceAll("<ID>", String.valueOf(id))
-                .replaceAll("<NOMBRE>", nombre);
+                .replaceAll("<NOMBRE>", nombre)
+                .replaceAll("<TOTAL>", String.valueOf(total));
 
         var populator = new ResourceDatabasePopulator();
         populator.addScript(new ByteArrayResource(insert.getBytes()));
