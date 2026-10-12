@@ -1,9 +1,12 @@
 package ar.com.grupoesfera.repartir.controllers;
 
+import ar.com.grupoesfera.repartir.exceptions.GastoInvalidoException;
 import ar.com.grupoesfera.repartir.itest.fixtures.GruposFixture;
+import ar.com.grupoesfera.repartir.model.Gasto;
 import ar.com.grupoesfera.repartir.services.GruposService;
 import io.restassured.http.ContentType;
 import org.junit.jupiter.api.Test;
+import org.mockito.ArgumentMatchers;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.boot.web.server.LocalServerPort;
@@ -89,6 +92,25 @@ public class GruposControllerIntegrationTest {
                 .body("id", contains(101,102))
                 .body("nombre", contains("Almuerzo", "Regalo para Lucas"))
                 .body("total", contains(1500.33f, 4000.0f));
+    }
+
+    @Test
+    void agregarGastoConMontoInvalidoRespondePeticionIncorrecta() {
+
+        when(gruposService.agregarGasto(ArgumentMatchers.eq(101L), ArgumentMatchers.any(Gasto.class)))
+                .thenThrow(new GastoInvalidoException());
+
+        given()
+                .accept(ContentType.JSON)
+                .port(randomServerPort)
+                .contentType(ContentType.JSON)
+                .body("""
+                        { "monto": -3500 }
+                        """)
+            .when()
+                .post("/api/grupos/101/gastos")
+            .then()
+                .statusCode(400);
     }
 
 }

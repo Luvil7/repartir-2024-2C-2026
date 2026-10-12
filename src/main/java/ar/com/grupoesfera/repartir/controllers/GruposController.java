@@ -1,5 +1,6 @@
 package ar.com.grupoesfera.repartir.controllers;
 
+import ar.com.grupoesfera.repartir.exceptions.GastoInvalidoException;
 import ar.com.grupoesfera.repartir.exceptions.GrupoInvalidoException;
 import ar.com.grupoesfera.repartir.model.Gasto;
 import ar.com.grupoesfera.repartir.model.Grupo;
@@ -97,6 +98,10 @@ public class GruposController {
         } catch (GrupoNoEncontradoException e) {
 
             response = ResponseEntity.notFound().build();
+
+        } catch (GastoInvalidoException e) {
+
+            response = ResponseEntity.badRequest().build();
 
         } catch (Exception e) {
 

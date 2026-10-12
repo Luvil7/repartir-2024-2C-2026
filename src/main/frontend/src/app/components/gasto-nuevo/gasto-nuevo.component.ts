@@ -2,6 +2,7 @@ import { Output } from '@angular/core';
 import { EventEmitter } from '@angular/core';
 import { Component, OnInit } from '@angular/core';
 import { MessageService } from 'primeng/api';
+import { Excepcion } from '../../model/excepcion';
 import { Grupo } from '../../model/grupo';
 import { IdentificarGrupoPipe } from '../../pipes/identificar-grupo.pipe';
 import { GrupoService } from '../../services/grupo.service';
@@ -45,6 +46,12 @@ export class GastoNuevoComponent implements OnInit {
   }
 
   guardar(): void {
+
+    if (this.monto < 0) {
+
+      this.guardadoFallido(new Excepcion('El monto no puede ser negativo'));
+      return;
+    }
 
     this.grupoService.agregarGasto(this.grupo, this.monto).subscribe(
       grupo => this.guardadoExitoso(grupo),
