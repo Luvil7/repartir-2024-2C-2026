@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Profile;
 import org.springframework.core.io.ByteArrayResource;
 import org.springframework.core.io.ResourceLoader;
+import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.datasource.init.ResourceDatabasePopulator;
 import org.springframework.stereotype.Component;
 
@@ -67,5 +68,10 @@ public class BaseDeDatosFixture {
         var populator = new ResourceDatabasePopulator();
         populator.addScript(new ByteArrayResource(insert.getBytes()));
         populator.execute(dataSource);
+    }
+
+    public int cantidadDeGrupos() {
+
+        return new JdbcTemplate(dataSource).queryForObject("SELECT COUNT(*) FROM grupo", Integer.class);
     }
 }
