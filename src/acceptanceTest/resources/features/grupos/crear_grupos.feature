@@ -29,6 +29,14 @@ Característica: Crear Grupo para repartir gastos
       Entonces no debería crear el grupo con un único miembro
       Y debería ser informado que necesita tener al menos dos miembros
 
+  Regla: Los grupos no tienen miembros repetidos
+
+    Escenario: No se puede crear un grupo con un miembro repetido
+      Dado que el usuario inicia la aplicacion
+      Cuando el usuario intenta crear un grupo indicando que sus miembros son 'mariano', 'juancruz' y 'mariano'
+      Entonces no puede crear el grupo con miembros repetidos
+      Y debe ser informado que los miembros no pueden repetirse
+
   Regla: Los grupos tienen un estado inicial
 
     Escenario: El total inicial del grupo es $ 0
