@@ -62,4 +62,41 @@ class GrupoTest {
 
         assertThat(grupo.estaFormado()).isFalse();
     }
+
+    @Test
+    void noTieneMiembrosRepetidosCuandoTodosSonDistintos() {
+
+        Grupo grupo = new Grupo();
+        grupo.setMiembros(Arrays.asList("mariano f", "mariano v", "juancruz"));
+
+        assertThat(grupo.tieneMiembrosRepetidos()).isFalse();
+    }
+
+    @Test
+    void tieneMiembrosRepetidosCuandoUnMiembroApareceDosVeces() {
+
+        Grupo grupo = new Grupo();
+        grupo.setMiembros(Arrays.asList("mariano", "juancruz", "mariano"));
+
+        assertThat(grupo.tieneMiembrosRepetidos()).isTrue();
+    }
+
+    @Test
+    void tieneMiembrosRepetidosCuandoSoloDifierenEnMayusculas() {
+
+        Grupo grupo = new Grupo();
+        grupo.setMiembros(Arrays.asList("mariano", "juancruz", "Mariano"));
+
+        assertThat(grupo.tieneMiembrosRepetidos()).isTrue();
+    }
+
+    @Test
+    void noTieneMiembrosRepetidosCuandoLosMiembrosSonNulos() {
+
+        Grupo grupo = new Grupo();
+
+        grupo.setMiembros(null);
+
+        assertThat(grupo.tieneMiembrosRepetidos()).isFalse();
+    }
 }

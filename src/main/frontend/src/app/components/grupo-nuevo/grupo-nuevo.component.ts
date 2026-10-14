@@ -1,5 +1,6 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { MessageService } from 'primeng/api';
+import { Excepcion } from 'src/app/model/excepcion';
 import { Grupo } from 'src/app/model/grupo';
 import { IdentificarGrupoPipe } from 'src/app/pipes/identificar-grupo.pipe';
 import { GrupoService } from '../../services/grupo.service';
@@ -37,10 +38,23 @@ export class GrupoNuevoComponent implements OnInit {
 
   guardar(): void {
 
+    if (this.tieneMiembrosRepetidos()) {
+
+      this.guardadoFallido(new Excepcion('Los miembros no pueden repetirse'));
+      return;
+    }
+
     this.grupoService.crear(this.nombre, this.miembros).subscribe(
       grupo => this.guardadoExitoso(grupo),
       error => this.guardadoFallido(error)
     );
+  }
+
+  private tieneMiembrosRepetidos(): boolean {
+
+    const nombres = (this.miembros || []).map(miembro => miembro.toLowerCase());
+
+    return new Set(nombres).size < nombres.length;
   }
 
   cancelar(): void {
