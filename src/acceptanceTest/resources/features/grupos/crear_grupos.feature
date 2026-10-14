@@ -31,11 +31,11 @@ Característica: Crear Grupo para repartir gastos
 
   Regla: Los grupos no tienen miembros repetidos
 
-    Escenario: No se puede crear un grupo con un miembro repetido
+    Escenario: No puede crear un grupo con un miembro repetido
       Dado que el usuario inició Repartir
       Cuando el usuario intenta crear un grupo indicando que sus miembros son 'mariano', 'juancruz' y 'mariano'
-      Entonces no puede crear el grupo con miembros repetidos
-      Y debe ser informado que los miembros no pueden repetirse
+      Entonces no deberia crear el grupo con miembros repetidos
+      Y deberia ser informado que los miembros no pueden repetirse
 
   Regla: Los grupos tienen un estado inicial
 

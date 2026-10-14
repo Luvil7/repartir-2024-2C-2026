@@ -37,16 +37,16 @@ public class SinMiembrosRepetidosSteps extends CucumberSteps {
         mensajeInformado = mensaje.getText();
     }
 
-    @Entonces("no puede crear el grupo con miembros repetidos")
-    public void noPuedeCrearElGrupoConMiembrosRepetidos() {
+    @Entonces("no deberia crear el grupo con miembros repetidos")
+    public void noDeberiaCrearElGrupoConMiembrosRepetidos() {
 
         assertThat(baseDeDatos.cantidadDeGrupos())
                 .as("Cantidad de grupos creados")
                 .isZero();
     }
 
-    @Y("debe ser informado que los miembros no pueden repetirse")
-    public void debeSerInformadoQueLosMiembrosNoPuedenRepetirse() {
+    @Y("deberia ser informado que los miembros no pueden repetirse")
+    public void deberiaSerInformadoQueLosMiembrosNoPuedenRepetirse() {
 
         assertThat(mensajeInformado)
                 .as("Mensaje informado al usuario")

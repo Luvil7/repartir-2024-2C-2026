@@ -12,12 +12,12 @@ Característica: Crear Grupo para repartir gastos
 
     Escenario: Se crea un grupo con dos miembros del mismo nombre que se distinguen por la inicial del apellido
       Cuando el usuario crea un grupo indicando que sus miembros son 'mariano f', 'mariano v' y 'juancruz'
-      Entonces debe crear el grupo con los miembros indicados
+      Entonces deberia crear el grupo con los miembros indicados
 
     Escenario: No puede crear un grupo con un miembro repetido
       Cuando el usuario intenta crear un grupo indicando que sus miembros son 'mariano', 'juancruz' y 'mariano'
-      Entonces no debe crear el grupo con miembros repetidos
+      Entonces no deberia crear el grupo con miembros repetidos
 
     Escenario: No puede crear un grupo con un miembro repetido que solo difiere en mayúsculas
       Cuando el usuario intenta crear un grupo indicando que sus miembros son 'mariano', 'juancruz' y 'Mariano'
-      Entonces no debe crear el grupo con miembros repetidos
+      Entonces no deberia crear el grupo con miembros repetidos

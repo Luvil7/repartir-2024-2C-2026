@@ -52,14 +52,14 @@ public class SinMiembrosRepetidosSteps extends FastCucumberSteps {
         }
     }
 
-    @Entonces("debe crear el grupo con los miembros indicados")
-    public void debeCrearElGrupoConLosMiembrosIndicados() {
+    @Entonces("deberia crear el grupo con los miembros indicados")
+    public void deberiaCrearElGrupoConLosMiembrosIndicados() {
 
         verify( repository ).save( grupo );
     }
 
-    @Entonces("no debe crear el grupo con miembros repetidos")
-    public void noDebeCrearElGrupoConMiembrosRepetidos() {
+    @Entonces("no deberia crear el grupo con miembros repetidos")
+    public void noDeberiaCrearElGrupoConMiembrosRepetidos() {
 
         assertThat( grupoRechazado ).isTrue();
         verify( repository, never() ).save( any() );
