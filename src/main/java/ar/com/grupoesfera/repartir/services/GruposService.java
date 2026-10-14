@@ -44,6 +44,10 @@ public class GruposService {
             throw new GrupoInvalidoException();
         }
 
+        if (nuevoGrupo.tieneMiembrosRepetidos()) {
+            throw new GrupoInvalidoException();
+        }
+
         if (Strings.isBlank(nuevoGrupo.getNombre())) {
             throw new GrupoInvalidoException();
 

@@ -10,7 +10,10 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import java.math.BigDecimal;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Locale;
+import java.util.Set;
 
 @Entity
 public class Grupo {
@@ -70,5 +73,28 @@ public class Grupo {
     public boolean estaFormado() {
 
         return (miembros != null) && (miembros.size() > 1);
+    }
+
+    public boolean tieneMiembrosRepetidos() {
+
+        if (miembros == null) {
+            return false;
+        }
+
+        Set<String> nombres = new HashSet<>();
+
+        for (String miembro : miembros) {
+
+            if (!nombres.add(sinDistinguirMayusculas(miembro))) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    private String sinDistinguirMayusculas(String miembro) {
+
+        return (miembro == null) ? null : miembro.toLowerCase(Locale.ROOT);
     }
 }
